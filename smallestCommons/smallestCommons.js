@@ -21,10 +21,35 @@ Here are some helpful links:
 
 
 
+
+
+
+
+  function euclideanAlgorithm(a, b) {
+      console.log("a: " + a);
+      console.log("b: " + b);
+      if(b === 0) {
+          return a;
+      }
+
+      const remainder = a % b;
+      return euclideanAlgorithm(b, remainder);
+  }
+
+  function gcdMultipleNumbers(...args) {
+    console.log("args: " + args);
+    const gcd = args.reduce((memo, next) => {
+        return euclideanAlgorithm(memo, next);}
+    );
+    return gcd;
+  }
+
 function smallestCommons(arr) {
 
-  var start,end = 0;
-  var newArr =[];
+    var start,end,i = 0;
+    var p = 1;
+    var newArr =[];
+
 
   //there's got to be a way to refactor this
   if(arr[i] > arr[i+1]){
@@ -35,69 +60,22 @@ function smallestCommons(arr) {
     end = arr[i+1];
   }
 
+
+
   //push all values of range into array
-  for(start; start <= end; start++){
-    newArr.push(start);
+  for(var j = start; j <= end; j++){
+    newArr.push(j);
+    p *= j;
+
   }
 
+  console.log("start: " + start);
+  console.log("end: " + end);
+  console.log("newArr: " + newArr);
+  console.log("p: " + p);
 
-  function euclideanAlgorithm(a, b) {
-      if(b === 0) {
-          return a;
-      }
-      const remainder = a % b;
-      return euclideanAlgorithm(b, remainder)
-  }
-
-  function gcdMultipleNumbers(...args) { //ES6 used here, change as appropriate
-    const gcd = args.reduce((memo, next) => {
-        return euclideanAlgorithm(memo, next)}
-    );
-
-    return gcd;
-  }
-
-  gcdMultipleNumbers(48,16,24,96) //8
 
 }
 
-
-
-function euclideanAlgorithm(a, b) {
-    if(b === 0) {
-        return a;
-    }
-    console.log("a: " + a);
-    console.log("b: " + b);
-    const remainder = a % b;
-    console.log("remainder: " + remainder);
-    return euclideanAlgorithm(b, remainder);
-}
-
-function gcdMultipleNumbers(...args) { //ES6 used here, change as appropriate
-  const gcd = args.reduce((memo, next) => {
-      console.log("memo: " + memo);
-      console.log("next: " + next);
-
-      return euclideanAlgorithm(memo, next)}
-  );
-
-  return gcd;
-}
-
-gcdMultipleNumbers(48,16,24,96) //8
-
-
-
-
-
-
-
-  return arr;
-}
-
-
-
-
-
-smallestCommons([1,5]);
+console.clear();
+gcdMultipleNumbers(smallestCommons([1,5]));
