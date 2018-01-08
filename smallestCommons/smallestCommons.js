@@ -1,57 +1,6 @@
-
-/*
-Find the smallest common multiple of the provided parameters that can be evenly divided by both,
-as well as by all sequential numbers in the range between these parameters.
-
-The range will be an array of two numbers that will not necessarily be in numerical order.
-
-e.g. for 1 and 3 - find the smallest common multiple of both 1 and 3 that is evenly divisible by all numbers between 1 and 3.
-
-Remember to use Read-Search-Ask if you get stuck. Try to pair program. Write your own code.
-
-Here are some helpful links:
-
-    Smallest Common Multiple
-
-
-
-    //gcd(a, b) = gcd(a - b, b)
-    //lcm(a, b) = a × b / gcd(a, b)
-*/
-
-
-
-
-
-
-
-  function euclideanAlgorithm(a, b) {
-      console.log("a: " + a);
-      console.log("b: " + b);
-      if(b === 0) {
-          return a;
-      }
-
-      const remainder = a % b;
-      return euclideanAlgorithm(b, remainder);
-  }
-
-  function gcdMultipleNumbers(...args) {
-    console.log("args: " + args);
-    const gcd = args.reduce((memo, next) => {
-        return euclideanAlgorithm(memo, next);}
-    );
-    return gcd;
-  }
-
 function smallestCommons(arr) {
-
-    var start,end,i = 0;
-    var p = 1;
-    var newArr =[];
-
-
-  //there's got to be a way to refactor this
+  //there's got to be a way to refactor this => YES, using min/max
+  /*
   if(arr[i] > arr[i+1]){
     start = arr[i+1];
     end = arr[i];
@@ -59,23 +8,66 @@ function smallestCommons(arr) {
     start = arr[i];
     end = arr[i+1];
   }
+  */
+  var start = Math.min.apply(null, arr);
+  var end = Math.max.apply(null, arr);
+  console.log("start: " + start);
+  console.log("end: " + end);
 
 
+  for (var i=start; i<end; i++) {
+    if(i===start){
+      grandLCM = (i * (i+1))/gcd(i, i+1);
+    }else{
+      grandLCM = (grandLCM * (i+1))/gcd(grandLCM, i+1);
+    }
+  }
+  // return Math.abs(p / gcdMultipleNumbers(newArr) );
+  return grandLCM;
 
-  //push all values of range into array
-  for(var j = start; j <= end; j++){
+
+  //Not required - push all values of range into array
+  /* for(var j = start; j < end; j++){
     newArr.push(j);
     p *= j;
 
   }
-
-  console.log("start: " + start);
-  console.log("end: " + end);
-  console.log("newArr: " + newArr);
   console.log("p: " + p);
 
-
+  */
 }
 
+  //Tighter formula in spoiler
+  /*
+  function euclideanAlgorithm(a, b) {
+    console.log("a: " + a);
+    console.log("b: " + b);
+    if(b === 0) {
+      return a;
+    }else
+      return gcd(y, x%y);
+  }
+  */
+
+  function gcd(x, y) {    // Implements The Euclidean Algorithm
+    if (y === 0)
+        return x;
+    else
+        return gcd(y, x%y);
+   }
+
+// Too much, spoiler had simple solution holding current lcm and calling gdc function
+
+/*
+function gcdMultipleNumbers(arr) {
+  console.log("arr: " + arr);
+  var gcd = arr.reduce((memo, next) => {
+    return euclideanAlgorithm(memo, next);}
+  );
+  console.log("gcd: " + gcd);
+  return gcd;
+}
+*/
+
 console.clear();
-gcdMultipleNumbers(smallestCommons([1,5]));
+console.log(smallestCommons([1, 5]));
