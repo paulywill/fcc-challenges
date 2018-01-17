@@ -1,22 +1,19 @@
 
 function telephoneCheck(str) {
-  // Good luck!
+ //NANP - http://en.wikipedia.org/wiki/North_American_Numbering_Plan
 
-  var regex1 = /[0-9-]+$/;
+  //https://stackoverflow.com/questions/4338267/validate-phone-number-with-javascript
+
+ //https://stackoverflow.com/questions/45620551/understanding-regexp-for-area-code-phone
+
+ //https://www.regextester.com/17
+
+  var regex1 = /^(?:(?:1?\s*(?:[-]\s*)?)?(\(\s*(\(\d{3}\)|\d{3})\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[-]\s*)?)([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[-]\s*)?([0-9]{4})$/;
+
+
   console.log("str: " + str);
   console.log(regex1.test(str));
-
-  ///^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
-
-
-
-
-  return true;
-
-
-
-
-
+  return regex1.test(str);
 }
 
 console.clear();
