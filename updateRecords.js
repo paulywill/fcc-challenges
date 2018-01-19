@@ -1,3 +1,15 @@
+/*TO DO:
+~~~~~~~~~
+
+- If prop isn't "tracks" and value isn't empty (""), update or set the value for that record album's property.
+
+- If prop is "tracks" but the album doesn't have a "tracks" property, create an empty array before adding the new value to the album's corresponding property.
+
+- If prop is "tracks" and value isn't empty (""), push the value onto the end of the album's existing tracks array.
+
+- If value is empty (""), delete the given prop property from the album.
+
+*/
 
 // Setup
 var collection = {
@@ -41,66 +53,26 @@ function updateRecords(id, prop, value) {
 
     //record exists
     if(k == id){
-
       //modify data
-      if(value != ""){
+      if(value){
+         //troubleshoot advanced partial find of dynamic property
+         var props = collection[k][prop];
+         for (var l in props){
+           console.log("props[l] == value: " + (props[l] == value) );
+         }
 
+      }else{
+        //delete property
 
-        if(prop == "tracks"){
-          console.log("prop is tracks!!!!!!!!!");
-        }
-        else if(prop == "artist") {
-          console.log("prop is artist!!!!!!!!!");
-        }
-      }//mod data
-
-      //delete data
-      else{
-        //delete myObj.test.key1;
-
+        delete collection[k][prop];
         console.log(prop + " has been deleted! :S");
-
       }
-
-
-
-      }
-
-    } //record exists check
-
-
-
-
-
-
+    } //for k
+  }
   return collection;
 }
 
 
 console.clear();
 // Alter values below to test your code
-updateRecords(5439, "artist", "ABBA");
-
-
-/* var getTitle=function(json,val){
-  for (var key in json) {
-    var titles= json[key];
-    for (var tit in titles) {
-      var names=titles[tit];
-      for (var name in names) {
-        var string=names[name];
-        if(string===val)
-          return tit;
-      }
-    }
-}
-}
-
-searchVal.forEach(function(valToSearch){
-   console.log(getTitle(json,valToSearch));
-});
-
-*/
-
-
-//
+updateRecords(2548, "tracks", "You Give Love a Bad Name");
