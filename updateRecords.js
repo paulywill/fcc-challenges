@@ -31,9 +31,42 @@ var collectionCopy = JSON.parse(JSON.stringify(collection));
 // Only change code below this line
 function updateRecords(id, prop, value) {
 
-  const args = Array.from(arguments);
-  console.log("args: " + args);
-  console.log("id: " + args[0]);
+
+  console.log("id: " + id);
+  console.log("prop: " + prop);
+  console.log("value: " + value);
+
+  for (var k in collection){
+    console.log("ID found?: " + (k == id));
+
+    //record exists
+    if(k == id){
+
+      //modify data
+      if(value != ""){
+
+
+        if(prop == "tracks"){
+          console.log("prop is tracks!!!!!!!!!");
+        }
+        else if(prop == "artist") {
+          console.log("prop is artist!!!!!!!!!");
+        }
+      }//mod data
+
+      //delete data
+      else{
+        //delete myObj.test.key1;
+
+        console.log(prop + " has been deleted! :S");
+
+      }
+
+
+
+      }
+
+    } //record exists check
 
 
 
@@ -47,3 +80,27 @@ function updateRecords(id, prop, value) {
 console.clear();
 // Alter values below to test your code
 updateRecords(5439, "artist", "ABBA");
+
+
+/* var getTitle=function(json,val){
+  for (var key in json) {
+    var titles= json[key];
+    for (var tit in titles) {
+      var names=titles[tit];
+      for (var name in names) {
+        var string=names[name];
+        if(string===val)
+          return tit;
+      }
+    }
+}
+}
+
+searchVal.forEach(function(valToSearch){
+   console.log(getTitle(json,valToSearch));
+});
+
+*/
+
+
+//
