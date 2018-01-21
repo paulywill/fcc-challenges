@@ -1,15 +1,3 @@
-/*TO DO:
-~~~~~~~~~
-
-- If prop isn't "tracks" and value isn't empty (""), update or set the value for that record album's property.
-
-- If prop is "tracks" but the album doesn't have a "tracks" property, create an empty array before adding the new value to the album's corresponding property.
-
-- If prop is "tracks" and value isn't empty (""), push the value onto the end of the album's existing tracks array.
-
-- If value is empty (""), delete the given prop property from the album.
-
-*/
 
 // Setup
 var collection = {
@@ -55,11 +43,31 @@ function updateRecords(id, prop, value) {
     if(k == id){
       //modify data
       if(value){
-         //troubleshoot advanced partial find of dynamic property
-         var props = collection[k][prop];
+
+        //deal with artist
+        if(prop == "artist"){
+          collection[k][prop]=value;
+        }
+
+        //deal with tracks
+        if(prop =="tracks"){
+          if (collection[k][prop]){
+            collection[k][prop].push(value);
+          }else{
+            var newVal = [];
+            collection[k][prop] = newVal;
+            collection[k][prop].push(value);
+          } //else
+
+        }
+
+        //Advance feature: troubleshoot partial find
+        /*
+        var props = collection[k][prop];
          for (var l in props){
            console.log("props[l] == value: " + (props[l] == value) );
          }
+        */
 
       }else{
         //delete property
@@ -75,4 +83,3 @@ function updateRecords(id, prop, value) {
 
 console.clear();
 // Alter values below to test your code
-updateRecords(2548, "tracks", "You Give Love a Bad Name");
