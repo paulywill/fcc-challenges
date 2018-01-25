@@ -6,12 +6,13 @@ function sym(args) {
       console.log("result: " + result);
       console.log("current: " + current);
       console.log("result.indexOf(current): " + result.indexOf(current));
-      //If my result array doesn't get current element
+
+      var index = result.indexOf(current);
+
+
       return result.indexOf(current) === -1 ?
-      //concat current element to result and return it
-      result.concat(current)
-      //Otherwise, just return actual result array
-      : result.splice(result.indexOf(current), 1);
+      result.concat(current) :
+      result.slice(0, index).concat(result.slice(index + 1));
     }, []
   );
 
