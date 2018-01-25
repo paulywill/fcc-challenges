@@ -1,24 +1,25 @@
 
 function sym(args) {
 
-  var flattened = [...arguments].reduce(
-    function(a, b) {
-      console.log("a: " + a);
-      console.log("b: " + b);
-      return a.concat(b);
-    },
-    []
+  var diff = [].concat.apply([],arguments).reduce(
+    function(result, current) {
+      console.log("result: " + result);
+      console.log("current: " + current);
+      console.log("result.indexOf(current): " + result.indexOf(current));
+      //If my result array doesn't get current element
+      return result.indexOf(current) === -1 ?
+      //concat current element to result and return it
+      result.concat(current)
+      //Otherwise, just return actual result array
+      : result.splice(result.indexOf(current), 1);
+    }, []
   );
 
-  console.log("flattened: " + flattened);
-  console.log(typeof + flattened);
-  console.log("flattened[2]: " + flattened[2]);
+  console.log("diff: " + diff);
 
 
 
-
-
-  return args;
+  return diff;
 }
 
 console.clear();
